@@ -27,7 +27,7 @@ namespace Autok
             var sorok = File.ReadAllLines(filePath);
             foreach (var sor in sorok)
             {
-                var darabok = sor.Split('\t'); // tabulátoros feldolgozás
+                var darabok = sor.Split('\t'); 
                 if (darabok.Length >= 4)
                 {
                     string rendszam = darabok[0];
@@ -41,6 +41,29 @@ namespace Autok
             }
 
             MessageBox.Show($"Sikeres beolvasás, {jelentesek.Count} sor érkezett.");
+        }
+
+        // ÚJ: Legkésőbbi jelzés keresése
+        private void BtnLegkesobbi_Click(object sender, RoutedEventArgs e)
+        {
+            if (jelentesek.Count == 0)
+            {
+                eredmenyText.Text = "Nincsenek adatok a listában!";
+                return;
+            }
+
+            Jelentes legkesobbi = jelentesek[0];
+            foreach (var jel in jelentesek)
+            {
+                if ((jel.Ora > legkesobbi.Ora) ||
+                    (jel.Ora == legkesobbi.Ora && jel.Perc > legkesobbi.Perc))
+                {
+                    legkesobbi = jel;
+                }
+            }
+
+            eredmenyText.Text = $"Legkésőbbi jelzés: {legkesobbi.Rendszam} " +
+                                $"- {legkesobbi.Ora}:{legkesobbi.Perc}";
         }
     }
 }
