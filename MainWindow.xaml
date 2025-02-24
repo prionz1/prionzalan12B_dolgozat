@@ -1,0 +1,13 @@
+<Window x:Class="Autok.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Autok - Feladat" Height="350" Width="525">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Autók jeladások" 
+                       FontWeight="Bold" 
+                       FontSize="16" 
+                       Margin="0,0,0,10" />
+        </StackPanel>
+    </Grid>
+</Window>
