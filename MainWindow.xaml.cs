@@ -112,5 +112,53 @@ namespace Autok
 
             eredmenyText.Text = $"A(z) {ora}:{perc} időpontban {db} jeladás történt.";
         }
+
+        private void BtnIdoKiir_Click(object sender, RoutedEventArgs e)
+        {
+            if (jelentesek.Count == 0)
+            {
+                eredmenyText.Text = "Nincsenek adatok.";
+                return;
+            }
+
+            var dict = new Dictionary<string, (int minOra, int minPerc, int maxOra, int maxPerc)>();
+
+            foreach (var j in jelentesek)
+            {
+                if (!dict.ContainsKey(j.Rendszam))
+                {
+                    dict[j.Rendszam] = (j.Ora, j.Perc, j.Ora, j.Perc);
+                }
+                else
+                {
+                    var adat = dict[j.Rendszam];
+                    if ((j.Ora < adat.minOra) ||
+                        (j.Ora == adat.minOra && j.Perc < adat.minPerc))
+                    {
+                        adat.minOra = j.Ora;
+                        adat.minPerc = j.Perc;
+                    }
+                    if ((j.Ora > adat.maxOra) ||
+                        (j.Ora == adat.maxOra && j.Perc > adat.maxPerc))
+                    {
+                        adat.maxOra = j.Ora;
+                        adat.maxPerc = j.Perc;
+                    }
+                    dict[j.Rendszam] = adat;
+                }
+            }
+
+            using (var sw = new StreamWriter("ido.txt"))
+            {
+                foreach (var kvp in dict)
+                {
+                    string rendszam = kvp.Key;
+                    var (minOra, minPerc, maxOra, maxPerc) = kvp.Value;
+                    sw.WriteLine($"{rendszam} {minOra}:{minPerc} {maxOra}:{maxPerc}");
+                }
+            }
+
+            eredmenyText.Text = "ido.txt elkészült (minden jármű első és utolsó jelzése).";
+        }
     }
 }
