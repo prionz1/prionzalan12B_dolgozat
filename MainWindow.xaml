@@ -8,6 +8,17 @@
                        FontWeight="Bold" 
                        FontSize="16" 
                        Margin="0,0,0,10" />
+
+            
+            <Button Content="Legkésőbbi jelzés" 
+                    Click="BtnLegkesobbi_Click" 
+                    Margin="0,0,0,10" />
+
+            
+            <TextBlock x:Name="eredmenyText"
+                       FontSize="14"
+                       TextWrapping="Wrap"
+                       Margin="0,10,0,0" />
         </StackPanel>
     </Grid>
 </Window>
