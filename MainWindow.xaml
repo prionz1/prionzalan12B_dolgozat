@@ -9,12 +9,15 @@
                        FontSize="16" 
                        Margin="0,0,0,10" />
 
-            
             <Button Content="Legkésőbbi jelzés" 
                     Click="BtnLegkesobbi_Click" 
                     Margin="0,0,0,10" />
 
-            
+            <!-- Új gomb az első jármű adataihoz -->
+            <Button Content="Első jármű adatai"
+                    Click="BtnElsoJarmu_Click"
+                    Margin="0,0,0,10" />
+
             <TextBlock x:Name="eredmenyText"
                        FontSize="14"
                        TextWrapping="Wrap"
