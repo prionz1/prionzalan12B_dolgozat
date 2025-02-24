@@ -25,6 +25,10 @@
                 <Button Content="Keres" Click="BtnKeresIdopont_Click"/>
             </StackPanel>
 
+            <Button Content="Idők kiírása (ido.txt)"
+                    Click="BtnIdoKiir_Click"
+                    Margin="0,0,0,10" />
+
             <TextBlock x:Name="eredmenyText"
                        FontSize="14"
                        TextWrapping="Wrap"
