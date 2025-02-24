@@ -27,7 +27,7 @@ namespace Autok
             var sorok = File.ReadAllLines(filePath);
             foreach (var sor in sorok)
             {
-                var darabok = sor.Split('\t'); 
+                var darabok = sor.Split('\t');
                 if (darabok.Length >= 4)
                 {
                     string rendszam = darabok[0];
@@ -65,7 +65,6 @@ namespace Autok
                                 $"- {legkesobbi.Ora}:{legkesobbi.Perc}";
         }
 
-        // ÚJ: Első jármű adatai
         private void BtnElsoJarmu_Click(object sender, RoutedEventArgs e)
         {
             if (jelentesek.Count == 0)
@@ -87,6 +86,31 @@ namespace Autok
 
             eredmenyText.Text = $"Az első jármű rendszáma: {elsoRendszam}\n" +
                                 $"Jelzési időpontjai: {string.Join(", ", idopontok)}";
+        }
+
+        private void BtnKeresIdopont_Click(object sender, RoutedEventArgs e)
+        {
+            if (!int.TryParse(txtOra.Text, out int ora))
+            {
+                eredmenyText.Text = "Hibás óra érték, nem szám!";
+                return;
+            }
+            if (!int.TryParse(txtPerc.Text, out int perc))
+            {
+                eredmenyText.Text = "Hibás perc érték, nem szám!";
+                return;
+            }
+
+            int db = 0;
+            foreach (var jel in jelentesek)
+            {
+                if (jel.Ora == ora && jel.Perc == perc)
+                {
+                    db++;
+                }
+            }
+
+            eredmenyText.Text = $"A(z) {ora}:{perc} időpontban {db} jeladás történt.";
         }
     }
 }
