@@ -43,7 +43,6 @@ namespace Autok
             MessageBox.Show($"Sikeres beolvasás, {jelentesek.Count} sor érkezett.");
         }
 
-        // ÚJ: Legkésőbbi jelzés keresése
         private void BtnLegkesobbi_Click(object sender, RoutedEventArgs e)
         {
             if (jelentesek.Count == 0)
@@ -64,6 +63,30 @@ namespace Autok
 
             eredmenyText.Text = $"Legkésőbbi jelzés: {legkesobbi.Rendszam} " +
                                 $"- {legkesobbi.Ora}:{legkesobbi.Perc}";
+        }
+
+        // ÚJ: Első jármű adatai
+        private void BtnElsoJarmu_Click(object sender, RoutedEventArgs e)
+        {
+            if (jelentesek.Count == 0)
+            {
+                eredmenyText.Text = "Nincsenek adatok a listában!";
+                return;
+            }
+
+            string elsoRendszam = jelentesek[0].Rendszam;
+
+            List<string> idopontok = new List<string>();
+            foreach (var jel in jelentesek)
+            {
+                if (jel.Rendszam == elsoRendszam)
+                {
+                    idopontok.Add($"{jel.Ora}:{jel.Perc}");
+                }
+            }
+
+            eredmenyText.Text = $"Az első jármű rendszáma: {elsoRendszam}\n" +
+                                $"Jelzési időpontjai: {string.Join(", ", idopontok)}";
         }
     }
 }
